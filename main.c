@@ -126,7 +126,7 @@ int main(void)
 		  canTxHeader.IDE = CAN_ID_STD;
 		  canTxHeader.DLC = 4;
 
-		  if ((curr_time_stamp - prev_time) > 50000)
+		  if ((curr_time_stamp - prev_time) > 500000)
 				  rpm = 0;
 
 		  data_to_Hex(rpm);
@@ -310,10 +310,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	curr_time =__HAL_TIM_GET_COUNTER(&htim2);
 	duration = (uint32_t) curr_time - prev_time;
-	rpm = (uint32_t) 500000*60/duration;
-	if(rpm >= 10000)
-		rpm = prev_rpm;
-	prev_rpm = rpm;
+	rpm = (uint32_t) 1000000*60/duration;
 	prev_time = curr_time;
 }
 /* USER CODE END 4 */
